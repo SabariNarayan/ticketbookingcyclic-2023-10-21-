@@ -222,7 +222,7 @@ app.post('/api', async (req, res) => {
   // Example route to get a movie by ID
 
 
-app.get('api/api/movies/:id', async (req, res) => {
+app.get('/api/api/movies/:id', async (req, res) => {
   try {
     const movie = await Movie.findById(req.params.id);
     if (!movie) {
