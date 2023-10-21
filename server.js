@@ -159,7 +159,7 @@ app.post('/api', async (req, res) => {
 
   //post:
 
-  app.post('/api/movies', async (req, res) => {
+  app.post('/api/api/movies', async (req, res) => {
     try {
       const {
         movieName,
@@ -207,7 +207,7 @@ app.post('/api', async (req, res) => {
   });
 
   // GET Movie :
-  app.get('/api/movies', async (req, res) => {
+  app.get('/api/api/movies', async (req, res) => {
     try {
       const movies = await Movie.find(); // Fetch all movies from the database
       res.json(movies);
@@ -222,7 +222,7 @@ app.post('/api', async (req, res) => {
   // Example route to get a movie by ID
 
 
-app.get('/api/movies/:id', async (req, res) => {
+app.get('/api/api/movies/:id', async (req, res) => {
   try {
     const movie = await Movie.findById(req.params.id);
     if (!movie) {
@@ -235,7 +235,7 @@ app.get('/api/movies/:id', async (req, res) => {
 });
   // Delete Movie
 
-  app.delete('/api/movies/:id', async (req, res) => {
+  app.delete('/api/api/movies/:id', async (req, res) => {
     try {
       await Movie.findByIdAndRemove(req.params.id);
       await Ticket.deleteMany({ movieId: req.params.id });
@@ -246,7 +246,7 @@ app.get('/api/movies/:id', async (req, res) => {
   });
   
  //update movie
- app.put('/api/movies/:id', async (req, res) => {
+ app.put('/api/api/movies/:id', async (req, res) => {
   try { 
     const { id } = req.params; // Get the movie ID from the URL parameter
     const updatedMovieData = req.body; // Get the updated movie data from the request body
@@ -274,7 +274,7 @@ app.get('/api/movies/:id', async (req, res) => {
 
 // Import the necessary dependencies and setup your transporter as shown earlier
 
-app.post('/api/movies/book-ticket/:id', async (req, res) => {
+app.post('/api/api/movies/book-ticket/:id', async (req, res) => {
   try {
     const movieId = req.params.id;
     const { name, email, showtime, numOfTickets, userId, movieName } = req.body;
@@ -366,7 +366,7 @@ app.post('/api/movies/book-ticket/:id', async (req, res) => {
 
 
 // Define a route to get tickets by user ID
-app.get('/api/tickets/user/:userId', async (req, res) => {
+app.get('/api/api/tickets/user/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
     
@@ -382,7 +382,7 @@ app.get('/api/tickets/user/:userId', async (req, res) => {
 
 // Cancel ticket 
 
-app.post('/api/movies/cancel-ticket/:id', async (req, res) => {
+app.post('/api/api/movies/cancel-ticket/:id', async (req, res) => {
   try {
     const ticketId = req.params.id;
     
