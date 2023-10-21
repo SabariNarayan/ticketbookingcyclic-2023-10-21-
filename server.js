@@ -133,7 +133,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 // user login
-app.post('/api/login', async (req, res) => {
+app.post('/api', async (req, res) => {
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
