@@ -8,7 +8,7 @@ const app = express();
 const path = require('path'); 
 app.use(express.json());
 app.use(cors());
-app.use(express.static('./dist/bookingApp'));
+app.use(express.static('./dist/booking-app'));
 
 // email authentication 
 const transporter = nodemailer.createTransport({
@@ -444,5 +444,5 @@ app.listen(PORT, () => {
 
   
 app.get('/*', function (req,res) {
-  res.sendFile(path.join(__dirname + '/dist/bookingApp/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/booking-app/index.html'));
 });
