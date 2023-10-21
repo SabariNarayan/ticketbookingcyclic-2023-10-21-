@@ -120,7 +120,7 @@ const Movie = mongoose.model('Movie', movieSchema);
 
 
 // Register a new user
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -133,7 +133,7 @@ app.post('/register', async (req, res) => {
 });
 
 // user login
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
