@@ -51,10 +51,10 @@ const Ticket = mongoose.model('Ticket', ticketSchema);
 // define review schema
 
 const reviewSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  movieId: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' },
-  rating: Number,
-  text: String,
+  movieId: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie', required : true },
+  rating: {type :Number, required:true },   
+  text: { type :String, required : true},  
+  name :{ type : String, required: true,}
   // Add other review-related fields
 });
 
@@ -435,7 +435,31 @@ app.post('/api/api/movies/cancel-ticket/:id', async (req, res) => {
   }
 });
 
+//post review
 
+app.post('/api/api/reviews', async (req, res) => {
+  try {
+    const { movieId, rating, text, name } = req.body;
+    const review = new Review({ movieId, rating, text, name });
+    const savedReview = await review.save();
+    res.status(201).json(savedReview);
+  } catch (error) {
+    res.status(500).json({ message: 'Error saving review', error: error.message });
+  }
+});
+
+// get review
+
+app.get('/api/api/reviews/:movieId', async (req, res) => {
+  try {
+    const movieId = req.params.movieId;
+    const reviews = await Review.find({ movieId }); // Fetch all reviews with the specified movieId
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    res.status(500).json({ message: 'Error fetching reviews', error: error.message });
+  }
+});
 
   const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
